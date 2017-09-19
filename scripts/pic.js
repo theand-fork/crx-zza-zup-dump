@@ -1,1 +1,204 @@
-"use strict";var Picimage=function(){function a(a){var a=new URI(a);return a.filename()||"image"+index+".jpg"}function b(){$(document).on("click","#"+i+" .close",function(){e()}),$(document).on("change","#pick-image-check-all",function(){$(this).is(":checked")?$("#"+i+" .item .select input ").prop("checked",!0):$("#"+i+" .item .select input ").prop("checked",!1)}),$(document).on("click","#"+i+" .modal-footer .download-all-button ",function(){var b=new JSZip,c=0,d=$("#"+i+" .item .select input:checked").length,e=[];return 1>d?void alert("선택목록이 없습니다."):void $.each($("#"+i+" .item .select input "),function(f,g){if(1==$(g).is(":checked")){var h=$(g).parents(".item").find(".img-wrapper .thumb").prop("src"),i=a(h);JSZipUtils.getBinaryContent(h,function(a,f){if(a)e.push(h);else{var g=b.folder("images");g.file(i,f,{binary:!0})}if(c++,c==d){e.length>0&&b.file("error.txt",e.join("\n"));var j=b.generate({type:"blob"});saveAs(j,"image.zip")}})}})}),$(document).on("mouseenter","#"+i+" .item ",function(){$(this).find(".menu").addClass("active")}).on("mouseleave","#"+i+" .item ",function(){$(this).find(".menu").removeClass("active")}),$(document).keydown(function(a){27==a.keyCode&&e()}),$(document).on("click","#"+i+" .item .info-button",function(){$(this).parents(".item").find(".info").toggleClass("active")}),$(document).on("click","#"+i+" .item .info input",function(){$(this).select()}),$(document).on("click","#"+i+" .item .download-button",function(){var b=$(this).parents(".item").find(".thumb").prop("src"),c=$("<a>").attr("href",b).attr("download",a(b)).appendTo("body");c[0].click(),c.remove()}),$(document).on("click","#"+i+" .item .fullsize",function(){var a=$(this).parents(".item").find(".img-wrapper .thumb").prop("src"),b=c(chrome.extension.getURL("html/fullscreen.html"));$("body").append(Mustache.render(b,{images:l,current_src:a})),$(".pic-image-full").addClass("active"),screenfull.request($(".pic-image-full")[0])}),$(document).on(screenfull.raw.fullscreenchange,"",function(){0==screenfull.isFullscreen&&$(".pic-image-full").remove()}),$(document).on("click",".pic-image-full .full-footer img",function(){console.log($(this).parents(".pic-image-full").find(".full-container .full-preview div img")),$(this).parents(".pic-image-full").find(".full-container .full-preview div img").attr("src",$(this).prop("src"))})}function c(a){return $.ajax({type:"GET",url:a,cache:!1,async:!1}).responseText}function d(){$("#"+i).css("display","block")}function e(){$("#"+i).remove()}function f(){var a=[],b=0;return $.each($("img"),function(c,d){$(d).prop("naturalWidth")>j&&$(d).prop("naturalHeight")>k&&(a.push({src:$(d).prop("src"),index:b}),b++)}),$.each($("div"),function(c,d){if(""!=$(d).css("background-image")){var e=/^url\((['"]?)(.*)\1\)$/.exec($(d).css("background-image"));if(e=e?e[2]:"",""!=e){var f=$("<img src='"+e+"' style='display:none;'>").appendTo("body");$(f).prop("naturalWidth")>j&&$(f).prop("naturalHeight")>k&&(a.push({src:e,index:b}),b++),f.remove()}}}),a}function g(a){var b=c(chrome.extension.getURL("html/item.html")),d={images:a,full_src:function(){return chrome.extension.getURL("images/fullsize.png")}};return Mustache.render(b,d)}function h(){if(l=f(),l.length<1)return void alert("적합한 이미지를 찾을수 없습니다.");var a=c(chrome.extension.getURL("html/modal.html")),b=g(l);$("body").append(Mustache.render(a,{items:b,count:l.length})),d()}var i="pic-image-dummy",j=160,k=100,l=void 0;return b(),{show:h}}();
+var Picimage = function() {
+  /**
+   * @param {Object} uri
+   * @return {?}
+   */
+  function setup(uri) {
+    uri = new URI(uri);
+    return uri.filename() || "image" + index + ".jpg";
+  }
+  /**
+   * @return {undefined}
+   */
+  function init() {
+    $(document).on("click", "#" + idfirst + " .close", function() {
+      done();
+    });
+    $(document).on("change", "#pick-image-check-all", function() {
+      if ($(this).is(":checked")) {
+        $("#" + idfirst + " .item .select input ").prop("checked", true);
+      } else {
+        $("#" + idfirst + " .item .select input ").prop("checked", false);
+      }
+    });
+    $(document).on("click", "#" + idfirst + " .modal-footer .download-all-button ", function() {
+      var zip = new JSZip;
+      /** @type {number} */
+      var i = 0;
+      var last = $("#" + idfirst + " .item .select input:checked").length;
+      /** @type {Array} */
+      var paths = [];
+      return 1 > last ? void alert("\uc120\ud0dd\ubaa9\ub85d\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.") : void $.each($("#" + idfirst + " .item .select input "), function(dataAndEvents, el) {
+        if (1 == $(el).is(":checked")) {
+          var path = $(el).parents(".item").find(".img-wrapper .thumb").prop("src");
+          var options = setup(path);
+          JSZipUtils.getBinaryContent(path, function(dataAndEvents, funcToCall) {
+            if (dataAndEvents) {
+              paths.push(path);
+            } else {
+              var self = zip.folder("images");
+              self.file(options, funcToCall, {
+                binary : true
+              });
+            }
+            if (i++, i == last) {
+              if (paths.length > 0) {
+                zip.file("error.txt", paths.join("\n"));
+              }
+              var r20 = zip.generate({
+                type : "blob"
+              });
+              saveAs(r20, "image.zip");
+            }
+          });
+        }
+      });
+    });
+    $(document).on("mouseenter", "#" + idfirst + " .item ", function() {
+      $(this).find(".menu").addClass("active");
+    }).on("mouseleave", "#" + idfirst + " .item ", function() {
+      $(this).find(".menu").removeClass("active");
+    });
+    $(document).keydown(function(event) {
+      if (27 == event.keyCode) {
+        done();
+      }
+    });
+    $(document).on("click", "#" + idfirst + " .item .info-button", function() {
+      $(this).parents(".item").find(".info").toggleClass("active");
+    });
+    $(document).on("click", "#" + idfirst + " .item .info input", function() {
+      $(this).select();
+    });
+    $(document).on("click", "#" + idfirst + " .item .download-button", function() {
+      var path = $(this).parents(".item").find(".thumb").prop("src");
+      var elements = $("<a>").attr("href", path).attr("download", setup(path)).appendTo("body");
+      elements[0].click();
+      elements.remove();
+    });
+    $(document).on("click", "#" + idfirst + " .item .fullsize", function() {
+      var htmlStartTag = $(this).parents(".item").find(".img-wrapper .thumb").prop("src");
+      var template = get(chrome.extension.getURL("html/fullscreen.html"));
+      $("body").append(Mustache.render(template, {
+        images : modelData,
+        current_src : htmlStartTag
+      }));
+      $(".pic-image-full").addClass("active");
+      screenfull.request($(".pic-image-full")[0]);
+    });
+    $(document).on(screenfull.raw.fullscreenchange, "", function() {
+      if (0 == screenfull.isFullscreen) {
+        $(".pic-image-full").remove();
+      }
+    });
+    $(document).on("click", ".pic-image-full .full-footer img", function() {
+      console.log($(this).parents(".pic-image-full").find(".full-container .full-preview div img"));
+      $(this).parents(".pic-image-full").find(".full-container .full-preview div img").attr("src", $(this).prop("src"));
+    });
+  }
+  /**
+   * @param {string} req
+   * @return {?}
+   */
+  function get(req) {
+    return $.ajax({
+      type : "GET",
+      url : req,
+      cache : false,
+      async : false
+    }).responseText;
+  }
+  /**
+   * @return {undefined}
+   */
+  function handler() {
+    $("#" + idfirst).css("display", "block");
+  }
+  /**
+   * @return {undefined}
+   */
+  function done() {
+    $("#" + idfirst).remove();
+  }
+  /**
+   * @return {?}
+   */
+  function initialize() {
+    /** @type {Array} */
+    var result = [];
+    /** @type {number} */
+    var idx = 0;
+    return $.each($("img"), function(dataAndEvents, input) {
+      if ($(input).prop("naturalWidth") > naturalWidth) {
+        if ($(input).prop("naturalHeight") > naturalHeight) {
+          result.push({
+            src : $(input).prop("src"),
+            index : idx
+          });
+          idx++;
+        }
+      }
+    }), $.each($("div"), function(dataAndEvents, curr) {
+      if ("" != $(curr).css("background-image")) {
+        /** @type {(Array.<string>|null)} */
+        var val = /^url\((['"]?)(.*)\1\)$/.exec($(curr).css("background-image"));
+        if (val = val ? val[2] : "", "" != val) {
+          var input = $("<img src='" + val + "' style='display:none;'>").appendTo("body");
+          if ($(input).prop("naturalWidth") > naturalWidth) {
+            if ($(input).prop("naturalHeight") > naturalHeight) {
+              result.push({
+                src : val,
+                index : idx
+              });
+              idx++;
+            }
+          }
+          input.remove();
+        }
+      }
+    }), result;
+  }
+  /**
+   * @param {?} modelData
+   * @return {?}
+   */
+  function ready(modelData) {
+    var template = get(chrome.extension.getURL("html/item.html"));
+    var data = {
+      images : modelData,
+      /**
+       * @return {?}
+       */
+      full_src : function() {
+        return chrome.extension.getURL("images/fullsize.png");
+      }
+    };
+    return Mustache.render(template, data);
+  }
+  /**
+   * @return {?}
+   */
+  function onload() {
+    if (modelData = initialize(), modelData.length < 1) {
+      return void alert("\uc801\ud569\ud55c \uc774\ubbf8\uc9c0\ub97c \ucc3e\uc744\uc218 \uc5c6\uc2b5\ub2c8\ub2e4.");
+    }
+    var template = get(chrome.extension.getURL("html/modal.html"));
+    var listStyleOptions = ready(modelData);
+    $("body").append(Mustache.render(template, {
+      items : listStyleOptions,
+      count : modelData.length
+    }));
+    handler();
+  }
+  /** @type {string} */
+  var idfirst = "pic-image-dummy";
+  /** @type {number} */
+  var naturalWidth = 160;
+  /** @type {number} */
+  var naturalHeight = 100;
+  var modelData = void 0;
+  return init(), {
+    /** @type {function (): ?} */
+    show : onload
+  };
+}();
