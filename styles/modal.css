@@ -1,0 +1,218 @@
+/**
+ * modal
+ */
+.pic-image-modal{
+  font-size:11px;
+  position: fixed;
+  z-index: 9999;
+  margin: 0px;
+  padding: 25px 25px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/**
+ * container
+ */
+.pic-image-modal .modal-container{
+  margin: 0px auto;
+  height:100%;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+
+/**
+ * header
+ */
+.pic-image-modal .modal-container .modal-header{
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+  height: 60px;
+  text-align: center;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.pic-image-modal .modal-container .modal-header h3{
+  color:#333 !important;
+  font-size:20px !important;
+  margin-top:5px !important;
+  margin-bottom:5px !important;
+  line-height:58px;
+}
+
+.pic-image-modal .modal-container .modal-header .close{
+  position: absolute !important;
+  top: 5px !important;
+  right: 5px !important;
+}
+
+
+/**
+ * body
+ */
+.pic-image-modal .modal-container .modal-body{
+  text-align:center;
+  height:auto;
+  margin: 0px auto;
+  padding: 10px 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  zoom: 1;
+  overflow-y:auto;
+  height:100%;
+  display:block !important;
+  
+}
+
+
+.pic-image-modal .modal-container .modal-body .item{
+  width:142px;
+  height:auto;
+  padding:5px;
+  margin:5px; 
+  border:1px solid #efefef;
+  border-radius: 5px;
+  display:inline-block;
+}
+
+.pic-image-modal .modal-container .modal-body .item .img-wrapper{
+  position:relative;
+}
+
+.pic-image-modal .modal-container .modal-body .item .img-wrapper .thumb{
+  height:140px;
+  width:100%;
+}
+.pic-image-modal .modal-container .modal-body .item .img-wrapper .fullsize{
+  position:absolute;
+  width:24px;
+  height:24px;
+  top:5px;
+  right:5px;
+  cursor: pointer;
+}
+
+.pic-image-modal .modal-container .modal-body .item .img-wrapper .menu{
+  position:absolute;
+  width:100%;
+  bottom:0px;
+  height:36px;
+  text-align:center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top:4px;
+  display: none;
+}
+
+.pic-image-modal .modal-container .modal-body .item .img-wrapper .menu.active{
+  display: block;
+}
+
+.pic-image-modal .modal-container .modal-body .item  .info input{
+  width:100%;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+.pic-image-modal .modal-container .modal-body .item  .info{
+  display: none;
+}
+.pic-image-modal .modal-container .modal-body .item .info.active{
+  display: block;
+}
+
+
+.pic-image-modal .modal-container .modal-footer{
+  padding-top:10px;
+  border-top:1px solid #e5e5e5;
+  height:60px;
+}
+
+
+
+.pic-image-full{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+}
+
+.pic-image-full.active{
+  display:block;
+}
+
+.pic-image-full .full-container{
+  margin: 0px auto;
+  height:100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.pic-image-full .full-container .full-preview{
+  padding:20px;
+  text-align:center;
+  width:100%;
+  height:auto;
+  margin: 0px auto;
+  padding: 10px 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  zoom: 1;
+  overflow-y:auto;
+  height:100%;
+  position:relative;
+}
+
+.pic-image-full .full-container .full-preview div {
+  height:100%;
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  overflow-y:scroll;
+  padding:10px;
+}
+
+.pic-image-full .full-container .full-preview div img{
+  height:auto;
+  width:auto;
+  min-height: 100%;
+  max-width:100%;
+
+}
+
+.pic-image-full .full-container .full-footer{
+  height:auto;
+  border-top:2px solid white;
+  overflow:auto;
+ 
+  padding:10px;
+}
+
+.pic-image-full .full-container .full-footer img{
+  width:100px;
+  height:100px;
+  display: inline-block;
+  margin:5px;
+  cursor:pointer;
+}

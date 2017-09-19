@@ -1,0 +1,1 @@
+chrome.browserAction.onClicked.addListener(function(a){chrome.tabs.executeScript({code:"Picimage.show();"})});

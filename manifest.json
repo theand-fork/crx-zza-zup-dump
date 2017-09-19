@@ -1,0 +1,29 @@
+{
+   "background": {
+      "scripts": [ "scripts/background.js" ]
+   },
+   "browser_action": {
+      "default_title": "짤줍"
+   },
+   "content_scripts": [ {
+      "css": [ "styles/vendor.css", "styles/modal.css" ],
+      "js": [ "bower_components/jquery/dist/jquery.js", "bower_components/filesaver.js/FileSaver.js", "bower_components/mustache/mustache.js", "bower_components/jszip/dist/jszip.min.js", "bower_components/jszip-utils/dist/jszip-utils.min.js", "bower_components/uri.js/src/URI.min.js", "bower_components/screenfull/dist/screenfull.js", "scripts/pic.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "이미지를 주워봅시다.^^",
+   "icons": {
+      "128": "images/128_icon.png",
+      "256": "images/256_icon.png",
+      "32": "images/32_icon.png",
+      "48": "images/48_icon.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAifPbRZW9XoqcZqVd5m4qbgp43Buq66+hnECq0v8ofd7+ePgGeX/EzUkRaxMJhqd2SM4oHxEWk1lwWSM/s28VBzMc3fPzIaMnq2ohkLuWN8iYrmYakD9Vl4wDk4Y2lkgqtT2mOmfLlmSBvOUslAAtHVFM0G+ebhMpOJmsfnc2vmgdMNj/CaumlY2iOzU/hFjI3ylVEMsTU9rEHHE0sBhNnUgDstgLPvJB/ZaGdCxQhieF4kwU1UQNUSEaHNSKLBRnFe6X9Ehc9+S/SUWSG3inCyh/UzDOJdAURqSl0HXkfauApxABpuyhTcX5aCN17Nk6bFbhPbXoVtJ4S+Jw1qtcRQIDAQAB",
+   "manifest_version": 2,
+   "name": "짤줍",
+   "permissions": [ "activeTab", "tabs", "http://*/*", "https://*/*" ],
+   "short_name": "현재페이지의 이미지를 주워봅시다.",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.7",
+   "web_accessible_resources": [ "html/*", "images/*" ]
+}

@@ -1,0 +1,21 @@
+{{#images}}
+<div class="item" >
+    <div class="img-wrapper">
+      <img class="thumb" src="{{{src}}}">
+      <img src="{{{full_src}}}" alt="" class="fullsize">
+      <div class="menu">
+        <button type="button" class="pure-button pure-button-primary info-button" >상세정보</button>  
+        <button type="button" class="pure-button pure-button-primary download-button" >다운로드</button>  
+      </div>
+    </div>
+    {{@index}}
+
+    <div class="info">
+      <input type="text" value="{{{src}}}">
+    </div>
+
+    <div class="text-center select">
+      <label for="pick-image-check-{{index}}"><input type="checkbox" id="pick-image-check-{{index}}" >선택하기</label>
+    </div>
+  </div>
+{{/images}}
