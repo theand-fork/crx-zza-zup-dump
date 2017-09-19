@@ -18,12 +18,10 @@
       "32": "images/32_icon.png",
       "48": "images/48_icon.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAifPbRZW9XoqcZqVd5m4qbgp43Buq66+hnECq0v8ofd7+ePgGeX/EzUkRaxMJhqd2SM4oHxEWk1lwWSM/s28VBzMc3fPzIaMnq2ohkLuWN8iYrmYakD9Vl4wDk4Y2lkgqtT2mOmfLlmSBvOUslAAtHVFM0G+ebhMpOJmsfnc2vmgdMNj/CaumlY2iOzU/hFjI3ylVEMsTU9rEHHE0sBhNnUgDstgLPvJB/ZaGdCxQhieF4kwU1UQNUSEaHNSKLBRnFe6X9Ehc9+S/SUWSG3inCyh/UzDOJdAURqSl0HXkfauApxABpuyhTcX5aCN17Nk6bFbhPbXoVtJ4S+Jw1qtcRQIDAQAB",
    "manifest_version": 2,
    "name": "짤줍",
    "permissions": [ "activeTab", "tabs", "http://*/*", "https://*/*" ],
    "short_name": "현재페이지의 이미지를 주워봅시다.",
-   "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.0.7",
    "web_accessible_resources": [ "html/*", "images/*" ]
 }
